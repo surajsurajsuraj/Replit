@@ -1,8 +1,10 @@
-#include <iostream>
-using namespace std;
+#include "StringConstruct.h"
+
+map<string,bool> m;
 
 bool canConstruct(string s, string arr[], int n){
   if(s=="") return true;
+  if(m.count(s)) return m[s];
   bool ans=false;
   for(int i=0;i<n;i++){
     int length = arr[i].length();
@@ -10,11 +12,6 @@ bool canConstruct(string s, string arr[], int n){
       ans = ans || canConstruct(s.substr(length),arr,n);
     }
   }
-  return ans;
+  return m[s]=ans;
 }
 
-int main() {
-    string arr[] = {"ab","abc","cd","def","abcd"};
-    cout<<canConstruct("abcdef", arr, 5);
-    return 0;
-}
